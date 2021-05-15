@@ -8,9 +8,9 @@ buttonDom.onclick = function(){
     el.innerHTML = htmlDom.value.trim();
     var component = nameDom.value || 'newComponent';
     resultNode.innerText = `<?php
-        namespace React\Tag;
+        namespace React\\Tag;
     
-        use React\Component;
+        use React\\Component;
 
         class `+ component +` extends Component{
             function render(){
