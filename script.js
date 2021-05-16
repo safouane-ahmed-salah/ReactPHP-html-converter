@@ -37,6 +37,6 @@ function toPhpReact(domList, tabs = 0){
         }
     }
     html += doms.join(',\n');
-    html += isList ? ']' : '';
+    html += isList ? '\n'+ space + ']' : '';
     return html;
 }
