@@ -28,13 +28,15 @@ function toPhpReact(domList, tabs = 2){
             var txt = node.data.trim();
             if(txt || !isList) doms.push(space +  '"' + txt + '"');
         }else if(node.tagName){
-            var attributes = [], tag = node.tagName.toLowerCase();
+            var attributes = [], tag = node.tagName.toLowerCase(), content = toPhpReact(node.childNodes, tabs+1), comma = '', atts = '';
             for(var att of node.attributes){
                 attributes.push('"' + att.name + '" => "' + att.value + '"')
             }
-            var content = toPhpReact(node.childNodes, tabs+1);
             if(!content) content='null';
-            doms.push(space + 'new ' + tag + '('+ (hasNoChild.includes(tag) ? '' : content  + ', ') + '[' +  attributes.join(', ') +'])');
+            if(attributes.length){
+                atts = '[' +  attributes.join(', ') + ']'; comma =  ', ';
+            }
+            doms.push(space + 'new ' + tag + '('+ (hasNoChild.includes(tag) ? '' : content  + comma) + atts +')');
         }
     }
     html += doms.join(',\n');
