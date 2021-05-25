@@ -1,7 +1,7 @@
 var buttonDom = document.getElementById('convert');
 var nameDom = document.getElementById('name');
-var mirrorHtml = CodeMirror.fromTextArea(document.getElementById('html'), {mode:  "text/html", lineNumbers: true, lineWrapping: true });
-var mirrorPhp = CodeMirror(document.getElementById('result'), {mode:  "application/x-httpd-php", lineNumbers: true, readOnly:true, lineWrapping: true });
+var mirrorHtml = CodeMirror.fromTextArea(document.getElementById('html'), {mode:  "text/html", lineNumbers: true, lineWrapping: true, styleActiveLine: true, theme: 'vscode-dark' });
+var mirrorPhp = CodeMirror(document.getElementById('result'), {mode:  "application/x-httpd-php", lineNumbers: true, readOnly:true, lineWrapping: true, theme: 'vscode-dark'});
 var hasNoChild = ['img', 'link', 'input', 'meta'];
 
 buttonDom.onclick = function(){
@@ -26,11 +26,11 @@ function toPhpReact(domList, tabs = 2){
     for(var node of domList){
         if(node.nodeType==3){ 
             var txt = node.data.trim();
-            if(txt || !isList) doms.push(space +  '"' + txt + '"');
+            if(txt || !isList) doms.push(space +  `"${txt}"`);
         }else if(node.tagName){
             var attributes = [], tag = node.tagName.toLowerCase(), content = toPhpReact(node.childNodes, tabs+1), comma = '', atts = '';
             for(var att of node.attributes){
-                attributes.push('"' + att.name + '" => "' + att.value + '"')
+                attributes.push(`"${att.name}" => "${att.value}"`);
             }
             if(!content) content='null';
             if(attributes.length){
@@ -40,6 +40,6 @@ function toPhpReact(domList, tabs = 2){
         }
     }
     html += doms.join(',\n');
-    html += isList ? '\n'+ space + ']' : '';
+    html += isList ? `\n${space}]` : '';
     return html;
 }

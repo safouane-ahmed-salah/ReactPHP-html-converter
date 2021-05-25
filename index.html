@@ -5,12 +5,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/mode/clike/clike.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/mode/php/php.min.js"></script>
     <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div style="display: flex;width:100%;">
-    <div style="width:600px">
-        <input id="name" placeholder="component name" style="margin: 5px 0;display: block;" />
-        <textarea style="height:300px;" id="html">
+<div style="padding: 10px 0;">
+    Component Name: <input id="name" placeholder="component name" />
+    <button id="convert">Convert</button>
+</div>
+<div style="display: flex;">
+    <div style="width: 50%">
+        <h4 style="margin-bottom: 5px;text-align: center;">HTML</h4>
+        <textarea id="html">
             <div class="card" style="width: 18rem;">
                 test
                 <img class="card-img-top" src="..." alt="Card image cap">
@@ -20,10 +25,11 @@
                   <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
               </div>
-            </textarea>
-        <button id="convert" style="display: block;margin: 5px 0;">Convert</button>
+        </textarea>
     </div>
-    <pre id="result" style="width:800px;height:400px;overflow:auto;border:1px solid">
-    </pre>
+    <div style="width: 50%">
+        <h4 style="margin-bottom: 5px;text-align: center;">PHP-REACT</h4>
+        <div id="result"></div>
+    </div>
 </div>
 </body>
