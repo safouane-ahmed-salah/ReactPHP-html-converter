@@ -33,14 +33,15 @@ function toPhpReact(domList, tabs = 2){
                 attributes.push(`"${att.name.replace(/"/g,'\\"')}" => "${att.value.replace(/"/g,'\\"')}"`);
             }
             if(attributes.length){
-                atts = '[' +  attributes.join(', ') + ']'; comma =  ', ';
+                atts = '[' +  attributes.join(', ') + ']';
             }
             if(attributes.length || content){
                 bracketOpen = '(';
                 bracketClose = ')';
             }
+            if(attributes.length && content) comma =  ', ';
 
-            doms.push(space + 'new ' + tag + bracketOpen + (!content ? '' : content  + comma) + atts + bracketClose);
+            doms.push(space + 'new ' + tag + bracketOpen + (!atts ? '' : atts + comma) + content + bracketClose);
         }
     }
     html += doms.join(',\n');
